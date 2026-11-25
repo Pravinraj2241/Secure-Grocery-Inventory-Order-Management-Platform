@@ -20,6 +20,7 @@
       <button id="tabRegister" onclick="switchTab('register')">Register</button>
     </div>
 
+    <!-- LOGIN FORM -->
     <form id="loginForm">
       <label for="loginUsername">Username</label>
       <input id="loginUsername" placeholder="admin" required>
@@ -28,10 +29,10 @@
       <input id="loginPassword" type="password" placeholder="••••••••" required>
 
       <div style="margin-top:20px;">
-      <div class="error-text" id="loginError">
-      </div>
+      <div class="error-text" id="loginError"></div>
     </form>
 
+    <!-- REGISTER FORM -->
     <form id="registerForm" style="display:none;">
       <label for="regUsername">Username</label>
       <input id="regUsername" placeholder="Choose a username" required>
@@ -44,7 +45,7 @@
 
       <label for="regRole">Role</label>
       <select id="regRole">
-        <option value="STAFF">Staff (orders & customers)</option>
+        <option value="STAFF">Staff (orders &amp; customers)</option>
         <option value="ADMIN">Admin (full access)</option>
       </select>
 

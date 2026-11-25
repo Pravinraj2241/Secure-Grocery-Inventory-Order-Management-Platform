@@ -21,42 +21,60 @@
     <properties>
         <java.version>17</java.version>
         <jjwt.version>0.11.5</jjwt.version>
+        <!-- Pinned explicitly: older Lombok builds crash on some newer JDK 17
+             patch releases (ExceptionInInitializerError in javac's TypeTag).
+             1.18.34 is confirmed compatible with JDK 17 and 21. -->
         <lombok.version>1.18.46</lombok.version>
     </properties>
 
     <dependencies>
+        <!-- Core web + REST -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
+
+        <!-- JPA / Database -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
+
+        <!-- Security -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
+
+        <!-- Validation -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-validation</artifactId>
         </dependency>
+
+        <!-- MySQL Driver -->
         <dependency>
             <groupId>com.mysql</groupId>
             <artifactId>mysql-connector-j</artifactId>
             <scope>runtime</scope>
         </dependency>
+
+        <!-- H2 (for quick local run / tests without installing MySQL) -->
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
             <scope>runtime</scope>
         </dependency>
+
+        <!-- Lombok -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>${lombok.version}</version>
             <optional>true</optional>
         </dependency>
+
+        <!-- JWT -->
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt-api</artifactId>
@@ -74,6 +92,8 @@
             <version>${jjwt.version}</version>
             <scope>runtime</scope>
         </dependency>
+
+        <!-- Testing -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -101,6 +121,14 @@
                     </excludes>
                 </configuration>
             </plugin>
+
+            <!--
+                Explicitly wire Lombok as an annotation processor.
+                Some Maven/JDK combinations do not auto-discover Lombok from the
+                normal dependency list, which causes "cannot find symbol" errors
+                for every generated getter/setter/builder method. Declaring it
+                here as an annotationProcessorPath fixes that reliably.
+            -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -112,6 +140,13 @@
                             <version>${lombok.version}</version>
                         </path>
                     </annotationProcessorPaths>
+                    <!--
+                        Newer JDK 17 patch builds enforce stricter module encapsulation
+                        around javac internals, which breaks Lombok's annotation
+                        processing with "ExceptionInInitializerError: TypeTag :: UNKNOWN".
+                        Forking the compiler and explicitly opening the internal javac
+                        packages Lombok needs to patch fixes this reliably.
+                    -->
                     <fork>true</fork>
                     <compilerArgs>
                         <arg>-J--add-opens=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED</arg>
