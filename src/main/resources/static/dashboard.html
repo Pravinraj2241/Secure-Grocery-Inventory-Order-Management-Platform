@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard · Grocery Management System</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar"></aside>
+
+    <main class="main">
+      <div class="page-header">
+        <div>
+          <h1>Dashboard</h1>
+          <p>A quick snapshot of your store's inventory, customers, and sales.</p>
+        </div>
+      </div>
+
+      <div class="stats-row" id="statsRow">
+        <!-- stat cards injected by dashboard.js -->
+      </div>
+
+      <div class="card">
+        <h2>Low stock alerts</h2>
+        <p class="sub-text">
+          Products at or below their reorder level — restock these soon.
+        </p>
+        <table>
+          <thead>
+            <tr>
+              <th>Product</th>
+              <th>Category</th>
+              <th class="num">In stock</th>
+              <th class="num">Reorder level</th>
+            </tr>
+          </thead>
+          <tbody id="lowStockBody"></tbody>
+        </table>
+        <div id="lowStockEmpty" class="empty-state">
+          <div class="stamp-lg">✓</div>
+          Everything is well stocked. No reorders needed right now.
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <div id="toast"></div>
+
+  <script src="/js/common.js"></script>
+  <script src="/js/dashboard.js"></script>
+</body>
+</html>

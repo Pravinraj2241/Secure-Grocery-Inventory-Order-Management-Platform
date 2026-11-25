@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign in · Grocery Management System</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="auth-page">
+
+  <div class="auth-card">
+    <div class="brand-row">
+      <div class="stamp">GM</div>
+      <h1>GroceryMS</h1>
+    </div>
+    <p class="sub">Sign in to manage inventory, customers, and billing.</p>
+
+    <div class="auth-tabs">
+      <button id="tabLogin" class="active" onclick="switchTab('login')">Log in</button>
+      <button id="tabRegister" onclick="switchTab('register')">Register</button>
+    </div>
+
+    <form id="loginForm">
+      <label for="loginUsername">Username</label>
+      <input id="loginUsername" placeholder="admin" required>
+
+      <label for="loginPassword">Password</label>
+      <input id="loginPassword" type="password" placeholder="••••••••" required>
+
+      <div style="margin-top:20px;">
+      <div class="error-text" id="loginError">
+      </div>
+    </form>
+
+    <form id="registerForm" style="display:none;">
+      <label for="regUsername">Username</label>
+      <input id="regUsername" placeholder="Choose a username" required>
+
+      <label for="regEmail">Email</label>
+      <input id="regEmail" type="email" placeholder="you@example.com" required>
+
+      <label for="regPassword">Password</label>
+      <input id="regPassword" type="password" placeholder="At least 6 characters" required>
+
+      <label for="regRole">Role</label>
+      <select id="regRole">
+        <option value="STAFF">Staff (orders & customers)</option>
+        <option value="ADMIN">Admin (full access)</option>
+      </select>
+
+      <div style="margin-top:20px;">
+        <button type="submit" class="btn btn-accent" style="width:100%; justify-content:center;">Create account</button>
+      </div>
+      <div class="error-text" id="registerError"></div>
+    </form>
+
+    <div class="hint-box">
+      <strong>Demo logins</strong> — admin / admin123 (Admin), staff / staff123 (Staff). Seeded automatically on first run.
+    </div>
+  </div>
+
+  <div id="toast"></div>
+
+  <script src="/js/common.js"></script>
+  <script src="/js/login.js"></script>
+</body>
+</html>
