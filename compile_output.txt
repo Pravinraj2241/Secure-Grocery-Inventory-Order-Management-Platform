@@ -1,0 +1,4 @@
+[INFO] Scanning for projects...
+[INFO] BUILD SUCCESS
+[INFO] Total time: 1.705 s
+[INFO] Finished at: 2026-11-14T21:40:45+05:30
