@@ -1,0 +1,12 @@
+# Auto detect text files and perform LF normalization
+* text=auto
+
+# Language classification for GitHub Linguist
+*.java linguist-language=Java
+*.html linguist-language=HTML
+*.css linguist-language=CSS
+*.js linguist-language=JavaScript
+*.xml linguist-language=XML
+*.properties linguist-language=Properties
+*.md linguist-language=Markdown
+*.json linguist-language=JSON
